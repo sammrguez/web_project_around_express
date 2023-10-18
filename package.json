@@ -5,14 +5,17 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "author": "Samantha Rodríguez",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.51.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.28.1"
+    "eslint-plugin-import": "^2.28.1",
+    "nodemon": "^3.0.1"
   },
   "dependencies": {
     "express": "^4.18.2"
