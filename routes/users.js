@@ -10,7 +10,8 @@ router.get("/users", (req, res) => {
       console.log(err);
       res.status(500).send({ message: "ha ocurrido un error en el servidor" });
       return;
-    } else {
+    }
+    {
       const users = JSON.parse(data);
       res.send(users);
     }

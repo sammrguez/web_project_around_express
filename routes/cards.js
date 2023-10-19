@@ -10,7 +10,8 @@ router.get("/cards", (req, res) => {
       console.log(err);
       res.status(500).send({ message: "ha ocurrido un error en el servidor" });
       return;
-    } else {
+    }
+    {
       const cards = JSON.parse(data);
       res.send(cards);
     }
