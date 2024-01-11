@@ -6,13 +6,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    require: true,
+    required: true,
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    require: true,
+    required: true,
   },
   avatar: {
     type: String,
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         return regExpLink.test(v);
       },
     },
-    require: true,
+    required: true,
   },
 });
 

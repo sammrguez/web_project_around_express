@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const regExpLink = /^(https?\:\/\/)(www\.)?[\w~:/?%#[\]@!$&'\.()*+,;=]*\/#?/;
 
 const cardSchema = new mongoose.Schema({
@@ -6,23 +7,24 @@ const cardSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    require: true,
+    required: true,
   },
   link: {
+    type: String,
     validate: {
       validator: function (v) {
         return regExpLink.test(v);
       },
     },
-    require: true,
+    required: true,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
-    require: true,
+    required: false,
   },
   likes: {
-    type: [mongoose.Schema.Types.ObjectId],
+    type: Array,
     default: [],
   },
   createdAd: {
