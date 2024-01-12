@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const regExpLink = /^(https?\:\/\/)(www\.)?[\w~:/?%#[\]@!$&'\.()*+,;=]*\/#?/;
+
+const regExpLink = /^(https?:\/\/)(www\.)?[\w~:/?%#[\]@!$&'.()*+,;=]*\/#?/;
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -17,7 +18,7 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     validate: {
-      validator: function (v) {
+      validator(v) {
         return regExpLink.test(v);
       },
     },

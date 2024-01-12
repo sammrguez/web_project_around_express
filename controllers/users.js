@@ -45,19 +45,19 @@ module.exports.createUser = (req, res) => {
       res.send({ data: user });
     })
 
-    .catch((err) => {
+    .catch(() => {
       res
         .status(ERROR_CODE)
         .send({ message: "los datos proporcionados no son válidos" });
     });
 };
-//otras rutas
+
 module.exports.updateProfile = (req, res) => {
   console.log(req.user._id);
   const { name, about } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
-    { name: name, about: about },
+    { name, about },
     { new: true, runValidators: true }
   )
     .orFail(() => {
@@ -80,7 +80,7 @@ module.exports.updateAvatar = (req, res) => {
   const { avatar } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
-    { avatar: avatar },
+    { avatar },
     { new: true, runValidators: true }
   )
     .orFail(() => {
@@ -89,10 +89,7 @@ module.exports.updateAvatar = (req, res) => {
       throw error;
     })
     .then((user) => res.send({ data: user }))
-    .catch((err) => {
-      console.log(
-        `Error ${err.name} con el mensaje ${err.message} ocurrió durante la ejecución del código, pero lo hemos manejado`
-      );
+    .catch(() => {
       res
         .status(NOT_FOUND_CODE)
         .send({ message: "No se ha encontrado ningún user con esa id" });

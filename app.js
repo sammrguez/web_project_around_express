@@ -6,6 +6,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 // conexion  MONGOdb
+
 mongoose.connect("mongodb://127.0.0.1:27017/aroundb");
 const db = mongoose.connection;
 
@@ -18,12 +19,15 @@ db.once("open", () => {
 });
 
 // importando routers
+
 const cardsRouter = require("./routes/cards");
 const usersRouter = require("./routes/users");
+
 //solucion temporal
+
 app.use((req, res, next) => {
   req.user = {
-    _id: "659f510812fa95af62c37adb", // pega el _id del usuario de prueba que creamos en el paso anterior
+    _id: "659f510812fa95af62c37adb",
   };
 
   next();
