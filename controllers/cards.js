@@ -55,3 +55,41 @@ module.exports.deleteCard = (req, res) => {
       res.status(NOT_FOUND_CODE).send({ message: err.message });
     });
 };
+//otras rutas
+module.exports.likeCard = (req, res) => {
+  console.log(req.user._id);
+  Card.findByIdAndUpdate(
+    req.params.id,
+    { $addToSet: { likes: req.user._id } }, // agrega _id al array si aún no está ahí
+    { new: true }
+  )
+    .then((card) => {
+      res.send(card);
+    })
+    .catch((err) => {
+      console.log("ID de tarjeta no encontrado");
+      res.status(NOT_FOUND_CODE).send({ message: err.message });
+    });
+};
+module.exports.dislikeCard = (req, res) => {
+  console.log(req.user._id);
+  const idLike = req.user._id;
+  Card.findByIdAndUpdate(
+    req.params.id,
+    { $pull: { likes: idLike } },
+    { new: true }
+  )
+    .then((card) => {
+      if (!card) {
+        console.log("Tarjeta no encontrada");
+        return res
+          .status(NOT_FOUND_CODE)
+          .send({ message: "Tarjeta no encontrada" });
+      }
+      res.send(card);
+    })
+    .catch((err) => {
+      console.log("Error al quitar el like de la tarjeta");
+      res.status(INTERNAL_SERVER_ERROR_CODE).send({ message: err.message });
+    });
+};

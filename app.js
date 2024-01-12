@@ -23,7 +23,7 @@ const usersRouter = require("./routes/users");
 //solucion temporal
 app.use((req, res, next) => {
   req.user = {
-    _id: "5d8b8592978f8bd833ca8133", // pega el _id del usuario de prueba que creamos en el paso anterior
+    _id: "659f510812fa95af62c37adb", // pega el _id del usuario de prueba que creamos en el paso anterior
   };
 
   next();
